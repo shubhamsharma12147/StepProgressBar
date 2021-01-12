@@ -4,7 +4,7 @@ This control is useful for design interactive Custom bar stepper where many prop
 
 Example Image :
 
-![alt text](https://github.com/shubhamsharma12147/StepProgressBar/blob/master/Example%201.png)
+<img source="https://github.com/shubhamsharma12147/StepProgressBar/blob/master/Example%201.png"  width="200" height="400"/>
 
 
 

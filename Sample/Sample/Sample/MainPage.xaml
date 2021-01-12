@@ -5,8 +5,8 @@
              xmlns:stepper="clr-namespace:StepProgressBar.Views;assembly=StepProgressBar">
 
     <StackLayout BackgroundColor="White">
-        <stepper:StepProgressBar HorizontalOptions="CenterAndExpand" SelectedStapsColor="Gray"
-                                 VerticalOptions="CenterAndExpand" Steps="5" BackgroundColor="Red"/>
+        <stepper:StepProgressBar HorizontalOptions="CenterAndExpand"  CurrentStep="1"
+                                 VerticalOptions="CenterAndExpand" Steps="5" />
     </StackLayout>
 
 </ContentPage>

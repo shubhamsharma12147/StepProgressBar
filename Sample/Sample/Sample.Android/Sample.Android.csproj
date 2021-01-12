@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6EDD5DB1-68C8-4A97-B787-2FC199944196}</ProjectGuid>
+    <ProjectGuid>{0A5A6196-0D26-460F-A182-3D5260C8D4D8}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>StepProgressBar.Droid</RootNamespace>
-    <AssemblyName>StepProgressBar.Android</AssemblyName>
+    <RootNamespace>Sample.Droid</RootNamespace>
+    <AssemblyName>Sample.Android</AssemblyName>
     <Deterministic>True</Deterministic>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
@@ -89,10 +89,15 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StepProgressBar\StepProgressBar.csproj">
-      <Project>{9ABCF16B-D225-4548-8A1D-1E7161E0DEA2}</Project>
-      <Name>StepProgressBar</Name>
+    <ProjectReference Include="..\Sample\Sample.csproj">
+      <Project>{A60BF0AC-D7CF-40FA-BE62-6787885BA3E2}</Project>
+      <Name>Sample</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

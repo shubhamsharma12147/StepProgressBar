@@ -14,7 +14,10 @@ namespace StepProgressBar.Views
             BindableProperty.Create(propertyName: nameof(Steps),
                                     returnType: typeof(int),
                                     declaringType: typeof(StepProgressBar),
-                                    defaultValue: 0);
+                                    defaultValue: 5);
+        /// <summary>
+        /// Default value - 5
+        /// </summary>
         public int Steps
         {
             get { return (int)GetValue(StepsProperty); }
@@ -28,7 +31,10 @@ namespace StepProgressBar.Views
             BindableProperty.Create(propertyName: nameof(CircleWidth),
                                     returnType: typeof(double),
                                     declaringType: typeof(StepProgressBar),
-                                    defaultValue: 0.0D);
+                                    defaultValue: 10D);
+        /// <summary>
+        /// Default value - 10
+        /// </summary>
         public double CircleWidth
         {
             get { return (double)GetValue(CircleWidthProperty); }
@@ -43,9 +49,9 @@ namespace StepProgressBar.Views
                                     returnType: typeof(int),
                                     declaringType: typeof(StepProgressBar),
                                     defaultValue: 0);
-
-
-
+        /// <summary>
+        /// Default value - 0
+        /// </summary>
         public int CurrentStep
         {
             get { return (int)GetValue(CurrentStepProperty); }
@@ -59,6 +65,9 @@ namespace StepProgressBar.Views
                                     returnType: typeof(Color),
                                     declaringType: typeof(StepProgressBar),
                                     defaultValue: Color.Gray);
+        /// <summary>
+        /// Default value - Color.Gray
+        /// </summary>
         public Color StepsColor
         {
             get { return (Color)GetValue(StepsColorProperty); }
@@ -73,6 +82,9 @@ namespace StepProgressBar.Views
                                     returnType: typeof(Color),
                                     declaringType: typeof(StepProgressBar),
                                     defaultValue: Color.Black);
+        /// <summary>
+        /// Default value - Color.Black
+        /// </summary>
         public Color SelectedStapsColor
         {
             get { return (Color)GetValue(SelectedStapsColorProperty); }
@@ -87,6 +99,9 @@ namespace StepProgressBar.Views
                                     returnType: typeof(Color),
                                     declaringType: typeof(StepProgressBar),
                                     defaultValue: Color.Gray);
+        /// <summary>
+        /// Default value - Color.Gray
+        /// </summary>
         public Color StripColor
         {
             get { return (Color)GetValue(StripColorProperty); }
@@ -99,7 +114,14 @@ namespace StepProgressBar.Views
             BindableProperty.Create(propertyName: nameof(TagsSource),
                                     returnType: typeof(IList<String>),
                                     declaringType: typeof(StepProgressBar),
-                                    defaultValue: null);
+                                    defaultValue: null,
+                                    validateValue:validateValue);
+
+        private static bool validateValue(BindableObject bindable, object value)
+        {
+            return ((IList<string>)value).Count == ((StepProgressBar)bindable).Steps;
+        }
+
         /// <summary>
         /// Tags count must be equal to Steps count
         /// </summary>
@@ -118,7 +140,10 @@ namespace StepProgressBar.Views
             BindableProperty.Create(propertyName: nameof(StripWidth),
                                     returnType: typeof(double),
                                     declaringType: typeof(StepProgressBar),
-                                    defaultValue: 0.0D);
+                                    defaultValue: 2D);
+        /// <summary>
+        /// Default value - 2
+        /// </summary>
         public double StripWidth
         {
             get { return (double)GetValue(StripWidthProperty); }
@@ -192,7 +217,7 @@ namespace StepProgressBar.Views
                 if (i < CurrentStep)
                     boxview.SetBinding(BoxView.ColorProperty, new Binding(SelectedStapsColorProperty.PropertyName, source: this));
                 else
-                    boxview.SetBinding(BoxView.ColorProperty, new Binding(StepsColorProperty.PropertyName, source: this));
+                    boxview.SetBinding(BoxView.ColorProperty, new Binding(StripColorProperty.PropertyName, source: this));
                 stack.Children.Add(boxview);
                 stack.Children.Add(frame);
             }

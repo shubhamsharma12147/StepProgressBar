@@ -166,14 +166,70 @@ namespace StepProgressBar.Views
         #endregion LabelStyle (Bindable Style)
 
 
+        #region ImageStyle (Bindable Style)
+        public static readonly BindableProperty ImageStyleProperty =
+            BindableProperty.Create(propertyName: nameof(ImageStyle),
+                                    returnType: typeof(Style),
+                                    declaringType: typeof(StepProgressBar),
+                                    defaultValue: null);
+        public Style ImageStyle
+        {
+            get { return (Style)GetValue(ImageStyleProperty); }
+            set { SetValue(ImageStyleProperty, value); }
+        }
+        #endregion ImageStyle (Bindable Style)
+
+        #region SelectedImageSourceCollection (Bindable IList<ImageSource>)
+        public static readonly BindableProperty SelectedImageSourceCollectionProperty =
+            BindableProperty.Create(propertyName: nameof(SelectedImageSourceCollection),
+                                    returnType: typeof(IList<ImageSource>),
+                                    declaringType: typeof(StepProgressBar),
+                                    defaultValue: null,
+                                    validateValue: SelectedImageSourceValidation);
+        public IList<ImageSource> SelectedImageSourceCollection
+        {
+            get { return (IList<ImageSource>)GetValue(SelectedImageSourceCollectionProperty); }
+            set { SetValue(SelectedImageSourceCollectionProperty, value); }
+        }
+        private static bool SelectedImageSourceValidation(BindableObject bindable, object value)
+        {
+            if (value == null)
+                return true;
+            return ((IList<ImageSource>)value).Count == ((StepProgressBar)bindable).Steps;
+        }
+        #endregion SelectedImageSourceCollection (Bindable ImageSource)
 
 
 
+
+        #region ImageSourceCollection (Bindable IList<ImageSource>)
+        public static readonly BindableProperty ImageSourceCollectionProperty =
+            BindableProperty.Create(propertyName: nameof(ImageSourceCollection),
+                                    returnType: typeof(IList<ImageSource>),
+                                    declaringType: typeof(StepProgressBar),
+                                    defaultValue: null,validateValue:ImageSourceValidation);
+
+        private static bool ImageSourceValidation(BindableObject bindable, object value)
+        {
+            if (value == null)
+                return true;
+            return ((IList<ImageSource>)value).Count == ((StepProgressBar)bindable).Steps;
+        }
+
+        public IList<ImageSource> ImageSourceCollection
+        {
+            get { return (IList<ImageSource>)GetValue(ImageSourceCollectionProperty); }
+            set { SetValue(ImageSourceCollectionProperty, value); }
+        }
+        #endregion ImageSourceCollection (Bindable IList<ImageSource>)
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
             if (propertyName == StepsProperty.PropertyName
-                || propertyName == CurrentStepProperty.PropertyName || propertyName == TagsSourceProperty.PropertyName)
+                || propertyName == CurrentStepProperty.PropertyName 
+                || propertyName == TagsSourceProperty.PropertyName
+                || propertyName==ImageSourceCollectionProperty.PropertyName
+                || propertyName==SelectedImageSourceCollectionProperty.PropertyName)
             {
                 GenrateBarStepper();
             }
@@ -196,14 +252,29 @@ namespace StepProgressBar.Views
                 var frame = new Frame
                 {
                     HorizontalOptions = LayoutOptions.Center,
-                    CornerRadius = 50
+                    CornerRadius = 50,
+                    HasShadow=false
                 };
-                frame.SetBinding(Frame.PaddingProperty, new Binding(CircleWidthProperty.PropertyName, source: this));
-                if (i < CurrentStep)
-                    frame.SetBinding(Frame.BackgroundColorProperty, new Binding(SelectedStapsColorProperty.PropertyName, source: this));
+                if (ImageSourceCollection != null && ImageSourceCollection?.Count != 0)
+                {
+                    var img = new Image
+                    {
+                        Source = i < CurrentStep?SelectedImageSourceCollection[i]:ImageSourceCollection[i],
+                    };
+                    img.SetBinding(Image.StyleProperty, new Binding(ImageStyleProperty.PropertyName, source: this));
+                    frame.Padding = new Thickness(0);
+                    frame.BackgroundColor = Color.Transparent;
+                    frame.Content = img;
+                }
                 else
-                    frame.SetBinding(Frame.BackgroundColorProperty, new Binding(StepsColorProperty.PropertyName, source: this));
-                if (i == 0)
+                {
+                    frame.SetBinding(Frame.PaddingProperty, new Binding(CircleWidthProperty.PropertyName, source: this));
+                    if (i < CurrentStep)
+                        frame.SetBinding(Frame.BackgroundColorProperty, new Binding(SelectedStapsColorProperty.PropertyName, source: this));
+                    else
+                        frame.SetBinding(Frame.BackgroundColorProperty, new Binding(StepsColorProperty.PropertyName, source: this));
+                }
+                    if (i == 0)
                 {
                     stack.Children.Add(frame);
                     continue;

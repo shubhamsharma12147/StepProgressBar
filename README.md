@@ -7,7 +7,9 @@ Please find nuget packege <a href="https://www.nuget.org/packages/StepProgressBa
 
 Example Image :
 
-<img src="https://github.com/shubhamsharma12147/StepProgressBar/blob/master/Example%201.png"  width="200" height="400"/>
+<img src="https://github.com/shubhamsharma12147/StepProgressBar/blob/master/Example/Example%201.png"  width="200" height="400"/>
+</br>
+<img src="https://github.com/shubhamsharma12147/StepProgressBar/blob/master/Example/Example%202.png"  width="200" height="400"/>
 </br>
 # Security Policy
 

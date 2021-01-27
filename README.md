@@ -3,7 +3,9 @@
 This control is useful for design interactive Custom bar stepper where many properties are support dynamic and many of are support staic values.
 
 ## Packages ##
-Please find nuget packege <a href="https://www.nuget.org/packages/StepProgressBar/">https://www.nuget.org/packages/StepProgressBar/</a>
+Nuget:  [StepProgressBar](https://www.nuget.org/packages/StepProgressBar/) [![NuGet](https://img.shields.io/nuget/v/StepProgressBar)](https://www.nuget.org/packages/StepProgressBar/)
+
+
 
 Example Image :
 

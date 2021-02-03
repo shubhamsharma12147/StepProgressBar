@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
   name: Setup Xamarin and Mono versions
-    runs-on: macos-latest
+  runs-on: macos-latest
     steps:
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1

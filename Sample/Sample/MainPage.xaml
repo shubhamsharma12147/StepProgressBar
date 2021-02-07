@@ -6,7 +6,8 @@
 
     <StackLayout>
         <views:StepProgressBar SelectedImageSourceCollection="{Binding SelectedImageList}" 
-             ImageSourceCollection="{Binding UnSelectedImageList}" CurrentStep="3"                 
+                               TabEventHandler="StepProgressBar_TabEventHandler" 
+             ImageSourceCollection="{Binding UnSelectedImageList}" CurrentStep="2"                 
              HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <views:StepProgressBar.ImageStyle>
                 <Style TargetType="Image">

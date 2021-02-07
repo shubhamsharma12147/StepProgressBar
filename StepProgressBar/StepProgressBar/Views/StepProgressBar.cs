@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Linq;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace StepProgressBar.Views
 {
@@ -200,7 +202,32 @@ namespace StepProgressBar.Views
         #endregion SelectedImageSourceCollection (Bindable ImageSource)
 
 
+        #region TabCommand (Bindable ICommand)
+        public static readonly BindableProperty TabCommandProperty =
+            BindableProperty.Create(propertyName: nameof(TabCommand),
+                                    returnType: typeof(ICommand),
+                                    declaringType: typeof(StepProgressBar),
+                                    defaultValue: null);
+        public ICommand TabCommand
+        {
+            get { return (ICommand)GetValue(TabCommandProperty); }
+            set { SetValue(TabCommandProperty, value); }
+        }
+        #endregion TabCommand (Bindable ICommand)
 
+
+        #region TabCommandParameter (Bindable object)
+        public static readonly BindableProperty TabCommandParameterProperty =
+            BindableProperty.Create(propertyName: nameof(TabCommandParameter),
+                                    returnType: typeof(object),
+                                    declaringType: typeof(StepProgressBar),
+                                    defaultValue: null);
+        public object TabCommandParameter
+        {
+            get { return (object)GetValue(TabCommandParameterProperty); }
+            set { SetValue(TabCommandParameterProperty, value); }
+        }
+        #endregion TabCommandParameter (Bindable object)
 
         #region ImageSourceCollection (Bindable IList<ImageSource>)
         public static readonly BindableProperty ImageSourceCollectionProperty =
@@ -234,7 +261,7 @@ namespace StepProgressBar.Views
                 GenrateBarStepper();
             }
         }
-
+        public event EventHandler<TabEventArgs> TabEventHandler;
         private void GenrateBarStepper()
         {
             StackLayout Outerstack = new StackLayout
@@ -291,6 +318,21 @@ namespace StepProgressBar.Views
                     boxview.SetBinding(BoxView.ColorProperty, new Binding(StripColorProperty.PropertyName, source: this));
                 stack.Children.Add(boxview);
                 stack.Children.Add(frame);
+                stack.Children.ToList().ForEach((frm) =>
+                {
+                    frm.GestureRecognizers?.Clear();
+                    if (frm.GetType() == typeof(Frame))
+                    {
+                        TapGestureRecognizer tapGesture = new TapGestureRecognizer();
+                        tapGesture.Tapped += (s, e) =>
+                        {
+                            var index = stack.Children.Where(view=>view.GetType()==typeof(Frame)).ToList()?.IndexOf(frm);
+                            TabEventHandler?.Invoke(this, new TabEventArgs { TabIndex = index });
+                            TabCommand?.Execute(TabCommandParameter);
+                        };
+                        frm.GestureRecognizers.Add(tapGesture);
+                    }
+                });
             }
             Outerstack.Children.Add(stack);
             if (TagsSource != null || TagsSource?.Count >= Steps)
@@ -317,5 +359,9 @@ namespace StepProgressBar.Views
             }
             Content = Outerstack;
         }
+    }
+   public  class TabEventArgs:EventArgs
+    {
+        public int? TabIndex { get; set; }
     }
 }

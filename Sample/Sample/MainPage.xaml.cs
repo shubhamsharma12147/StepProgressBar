@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Sample
@@ -31,7 +32,6 @@ namespace Sample
                 OnPropertyChanged();
             }
         }
-
         public MainPage()
         {
             InitializeComponent();
@@ -51,8 +51,14 @@ namespace Sample
                 "Star_blank",
                 "Star_blank",
                 "Star_blank",
+                "Star_blank",
             };
 
+        }
+
+        private void StepProgressBar_TabEventHandler(object sender, StepProgressBar.Views.TabEventArgs e)
+        {
+            var index = e.TabIndex;
         }
     }
 }

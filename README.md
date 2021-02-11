@@ -6,7 +6,7 @@ This control is useful for design interactive Custom bar stepper where many prop
 Nuget:  [StepProgressBar](https://www.nuget.org/packages/StepProgressBar/) [![NuGet](https://img.shields.io/nuget/v/StepProgressBar)](https://www.nuget.org/packages/StepProgressBar/)
 
 ## Builds ##
-<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/shubhamsharma12147/StepProgressBar/CI">
+GitHub Workflow Status : <img alt="GitHub Workflow Status" src="https://github.com/ShubhamSharma12147/StepProgressBar/workflows/CI/badge.svg">
 
 Example Image :
 

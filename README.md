@@ -5,7 +5,8 @@ This control is useful for design interactive Custom bar stepper where many prop
 ## Packages ##
 Nuget:  [StepProgressBar](https://www.nuget.org/packages/StepProgressBar/) [![NuGet](https://img.shields.io/nuget/v/StepProgressBar)](https://www.nuget.org/packages/StepProgressBar/)
 
-
+## Builds ##
+<img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/shubhamsharma12147/StepProgressBar/CI">
 
 Example Image :
 
